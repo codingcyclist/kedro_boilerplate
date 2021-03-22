@@ -10,7 +10,7 @@
     ```
 2. Run the following command to build the docker image and to create the kedro project. You'll be asked for a name of your kedro project - remember that name:
     ```shell script
-    docker-compose -f docker-compose.yml --name kedro run kedro
+    docker-compose -f docker-compose.yml --name kedro --rm run kedro
     ```
 3. Comment out the first line in `entrypoint.sh` and add a second line. Your final `entrypoint.sh` should look as follows:
     ```shell script
