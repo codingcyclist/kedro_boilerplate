@@ -1,0 +1,1 @@
+kedro new && bash

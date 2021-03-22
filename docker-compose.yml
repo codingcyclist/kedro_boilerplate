@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+    kedro:
+      stdin_open: true # docker run -i
+      tty: true # docker run -t
+      build: .
+      ports:
+        - "8888:8888"
+      volumes:
+        - ./:/kedro/home/
+      container_name: kedro
+    #    environment:
+    #      - DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}
+    #    depends_on:
+    #      - postgres
+    #postgres:
+    #    image: postgres:11.9
+    #    volumes:
+    #      - bunge_postgres_data:/var/lib/postgresql/data/
+    #    container_name: postgres
+    #    environment:
+    #      - POSTGRES_DB=${POSTGRES_DB}
+    #      - POSTGRES_USER=${POSTGRES_USER}
+    #      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    #    ports:
+    #      - 5432:5432
+#volumes:
+#    bunge_postgres_data:
