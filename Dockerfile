@@ -14,16 +14,21 @@ useradd -d /kedro -s /bin/bash -g ${KEDRO_GID} -u ${KEDRO_UID} kedro
 RUN su && apt-get update && apt-get install -y locales locales-all && dpkg-reconfigure locales
 
 WORKDIR /kedro/
-ADD ./entrypoint.sh /kedro/
-RUN chmod +x /kedro/entrypoint.sh
+COPY kedro_starter/entrypoint.sh /kedro/
+RUN tr -d "\r" < /kedro/entrypoint.sh > /kedro/entrypoint_tmp.sh &&\
+    mv /kedro/entrypoint_tmp.sh /kedro/entrypoint.sh &&\
+    chmod +x /kedro/entrypoint.sh
 
 RUN chown -R kedro:${KEDRO_GID} /kedro
 USER kedro
 
 RUN pip install kedro==0.17.2 jupyterlab==3.0.12
-ENV PATH=${PATH}:/kedro/.local/bin
+ENV PATH=${PATH}:/kedro/.local/bin:/kedro/.local/lib
 RUN pip install --user qgrid; jupyter nbextension enable --py --sys-prefix qgrid; jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
 WORKDIR /kedro/home/
 EXPOSE 8888
-
-ENTRYPOINT ["bash", "/kedro/entrypoint.sh"]
+#CMD ["sleep","infinity"]
+#CMD ["kedro","new"]
+ENTRYPOINT ["bash","/kedro/entrypoint.sh"]
+#CMD ["jupyter", "lab", "--ip", "0.0.0.0"]

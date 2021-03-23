@@ -1,14 +1,13 @@
 version: "3.8"
 services:
     kedro:
-      stdin_open: true # docker run -i
-      tty: true # docker run -t
       build: .
       ports:
         - "8888:8888"
       volumes:
         - ./:/kedro/home/
       container_name: kedro
+      #command: "sleep infinity"
     #    environment:
     #      - DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}
     #    depends_on:
