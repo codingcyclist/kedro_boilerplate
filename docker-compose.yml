@@ -6,22 +6,7 @@ services:
         - "8888:8888"
       volumes:
         - ./:/kedro/home/
+        - kedro_packages:/kedro/.local/
       container_name: kedro
-      #command: "sleep infinity"
-    #    environment:
-    #      - DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}
-    #    depends_on:
-    #      - postgres
-    #postgres:
-    #    image: postgres:11.9
-    #    volumes:
-    #      - bunge_postgres_data:/var/lib/postgresql/data/
-    #    container_name: postgres
-    #    environment:
-    #      - POSTGRES_DB=${POSTGRES_DB}
-    #      - POSTGRES_USER=${POSTGRES_USER}
-    #      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    #    ports:
-    #      - 5432:5432
-#volumes:
-#    bunge_postgres_data:
+volumes:
+    kedro_packages:

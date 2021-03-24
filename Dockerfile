@@ -22,13 +22,10 @@ RUN tr -d "\r" < /kedro/entrypoint.sh > /kedro/entrypoint_tmp.sh &&\
 RUN chown -R kedro:${KEDRO_GID} /kedro
 USER kedro
 
-RUN pip install kedro==0.17.2 jupyterlab==3.0.12
+RUN pip install kedro==0.17.0 jupyterlab==0.31.1
 ENV PATH=${PATH}:/kedro/.local/bin:/kedro/.local/lib
 RUN pip install --user qgrid; jupyter nbextension enable --py --sys-prefix qgrid; jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 WORKDIR /kedro/home/
 EXPOSE 8888
-#CMD ["sleep","infinity"]
-#CMD ["kedro","new"]
 ENTRYPOINT ["bash","/kedro/entrypoint.sh"]
-#CMD ["jupyter", "lab", "--ip", "0.0.0.0"]
