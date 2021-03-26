@@ -23,9 +23,11 @@ RUN chown -R kedro:${KEDRO_GID} /kedro
 USER kedro
 
 RUN pip install kedro==0.17.0 jupyterlab==0.31.1
-ENV PATH=${PATH}:/kedro/.local/bin:/kedro/.local/lib
+ENV PATH=${PATH}:/kedro/.local/bin:/kedro/.local/lib:/kedro/home/
+ENV PYTHONPATH=/kedro/home/
 RUN pip install --user qgrid; jupyter nbextension enable --py --sys-prefix qgrid; jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 WORKDIR /kedro/home/
 EXPOSE 8888
+
 ENTRYPOINT ["bash","/kedro/entrypoint.sh"]
