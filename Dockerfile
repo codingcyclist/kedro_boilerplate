@@ -1,5 +1,4 @@
-FROM python:3.7.9-buster
-
+FROM nikolaik/python-nodejs:python3.7-nodejs12
 RUN mkdir -p /tmp/runtime; chmod -R 777 /tmp/runtime
 ENV JUPYTER_RUNTIME_DIR /tmp/runtime
 
@@ -22,10 +21,15 @@ RUN tr -d "\r" < /kedro/entrypoint.sh > /kedro/entrypoint_tmp.sh &&\
 RUN chown -R kedro:${KEDRO_GID} /kedro
 USER kedro
 
-RUN pip install kedro==0.17.0 jupyterlab==0.31.1
+RUN pip install kedro==0.17.0 jupyterlab==2.2.9 qgrid==1.3.1 plotly
 ENV PATH=${PATH}:/kedro/.local/bin:/kedro/.local/lib:/kedro/home/
-ENV PYTHONPATH=/kedro/home/
-RUN pip install --user qgrid; jupyter nbextension enable --py --sys-prefix qgrid; jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
+RUN pip install --user ; \
+    jupyter labextension install jupyterlab-plotly@4.14.3 --no-build; \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build; \
+    jupyter labextension install qgrid2; \
+    jupyter labextension enable qgrid; \
+    jupyter labextension enable widgetsnbextension
 
 WORKDIR /kedro/home/
 EXPOSE 8888
