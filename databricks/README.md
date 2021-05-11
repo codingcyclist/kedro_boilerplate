@@ -1,10 +1,18 @@
 # Kedro Boilerplate Image
+This is the kedro base image, boasting the following features:
+* `kedro` `0.17.0`
+* `jupyterlab` `2.2.9`
+* `qgrid` `1.3.1` (see details below)
+* `plotly` `4.14.3` (see details below)
+
+1. default project name is `project_root` - change it using the `KEDRO_PROJECT_NAME` environment variable in your docker run command (see example below)
+   
 1. Clone this repository -> You will end up with a folder of just 5 files
     ```shell script
     <your_dir>/
-     - kedro_starter/
+     - default/
        - config.yml
-       - kedro_starter.ipynb
+       - default.ipynb
      - docker-compose.yml
      - Dockerfile
      - entrypoint.sh

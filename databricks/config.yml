@@ -1,0 +1,4 @@
+output_dir: /kedro/home/
+project_name: <default>
+repo_name: <default>
+python_package: <default>

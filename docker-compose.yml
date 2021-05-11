@@ -1,12 +1,15 @@
 version: "3.8"
 services:
     kedro:
-      build: .
+      build:
+        context: .
+        args:
+          - KEDRO_PROJECT_NAME=${KEDRO_PROJECT_NAME:-kedro_project}
       ports:
         - "8888:8888"
       volumes:
         - ./:/kedro/home/
         - kedro_packages:/kedro/.local/
-      container_name: kedro
+      container_name: ${KEDRO_DOCKER_CONTAINER_NAME:-kedro} # default container name
 volumes:
     kedro_packages:
