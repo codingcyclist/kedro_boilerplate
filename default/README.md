@@ -1,6 +1,8 @@
 # `kedro-default`: A simple `kedro` boilerplate image with `plotly` and `qgrid` support
 
 The purpose of this Docker image is to create fully configured, containerized kedro projects from scratch in no time.
+
+![](kedro-default.gif)
 It is built around `kedro 0.17.0` and by default, comes with some additional dependencies, which have proven to be
 useful across many kedro projects, including:
 * `jupyterlab` `2.2.9`

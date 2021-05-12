@@ -8,7 +8,7 @@ else
   kedro new --config /kedro/config.yml --verbose && \
   cd $(pwd)/$KEDRO_PROJECT_NAME && \
   mv /kedro/requirements.txt ./src/ && \
-  mv /kedro/kedro_example.ipynb /notebooks/kedro_example.ipynb && \
+  mv /kedro/kedro_example.ipynb ./notebooks/ && \
   kedro install && \
   echo "Root folder of your kedro project: "$(pwd) && \
   echo $(pwd) && kedro jupyter lab --ip 0.0.0.0 --no-browser

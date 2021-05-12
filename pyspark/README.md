@@ -3,6 +3,8 @@
 The purpose of this Docker image is to create fully configured, containerized kedro projects **with pyspark support**
 from scratch in no time.
 
+![kedro-pyspark.gif](kedro-pyspark.gif)
+
 The Docker image is built on top of the `kedro-default` Docker image (i.e. `kedro 0.17.0`, `python 3.7`). It provides full `pyspark` support on top of all
 functionalities included in `kedro-default` (including plotly, qgrid, etc.). In particular, the `kedro-pyspark` Docker 
 image comes pre-configured with Java 11, pyspark, and pyarrow.
