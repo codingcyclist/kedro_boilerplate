@@ -13,7 +13,7 @@ useradd -d /kedro -s /bin/bash -g ${KEDRO_GID} -u ${KEDRO_UID} kedro
 RUN su && apt-get update && apt-get install -y locales locales-all && dpkg-reconfigure locales
 
 WORKDIR /kedro/
-COPY config.yml entrypoint.sh requirements.txt /kedro/
+COPY config.yml entrypoint.sh requirements.txt kedro_example.ipynb /kedro/
 RUN tr -d "\r" < /kedro/entrypoint.sh > /kedro/entrypoint_tmp.sh &&\
     mv /kedro/entrypoint_tmp.sh /kedro/entrypoint.sh &&\
     chmod +x /kedro/entrypoint.sh
@@ -21,18 +21,18 @@ RUN tr -d "\r" < /kedro/entrypoint.sh > /kedro/entrypoint_tmp.sh &&\
 RUN chown -R kedro:${KEDRO_GID} /kedro
 USER kedro
 
-RUN pip install -r /kedro/requirements.txt
+RUN pip install -r /kedro/requirements.txt --no-cache-dir
 ENV PATH=${PATH}:/kedro/.local/bin:/kedro/.local/lib:/kedro/home/
 ENV KEDRO_PROJECT_NAME=${KEDRO_PROJECT_NAME:-project_root}
 
 RUN jupyter labextension install jupyterlab-plotly@4.14.3 --no-build; \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build; \
     jupyter labextension install qgrid2 --no-build; \
+    jupyter lab build; \
     jupyter labextension enable qgrid; \
     jupyter labextension enable widgetsnbextension
 
 WORKDIR /kedro/home/
 EXPOSE 8888
 
-#ENTRYPOINT ["sleep","infinity"]
 ENTRYPOINT ["bash","/kedro/entrypoint.sh"]

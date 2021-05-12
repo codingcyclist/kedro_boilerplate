@@ -1,0 +1,39 @@
+# You can define spark specific configuration here.
+
+spark.driver.maxResultSize: 4g
+spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+spark.sql.execution.arrow.enabled: true
+
+# https://kedro.readthedocs.io/en/stable/11_tools_integration/01_pyspark.html#tips-for-maximising-concurrency-using-threadrunner
+spark.scheduler.mode: FAIR
+
+spark.yarn.appMasterEnv.ARROW_PRE_0_15_IPC_FORMAT: 1
+spark.executorEnv.ARROW_PRE_0_15_IPC_FORMAT: 1
+
+# Other config options which are commonly used
+
+#spark.dynamicAllocation.cachedExecutorIdleTimeout: 600s
+#spark.dynamicAllocation.enabled: true
+#spark.dynamicAllocation.executorIdleTimeout: 100s
+#spark.dynamicAllocation.initialExecutors: 1
+#spark.dynamicAllocation.maxExecutors: 100
+#spark.dynamicAllocation.minExecutors: 0
+spark.executor.cores: 8
+spark.executor.memory: 24g
+spark.executor.memoryOverhead: 4g
+#spark.hadoop.fs.permissions.umask-mode: "002"
+#spark.kryoserializer.buffer.max: 1g
+#spark.network.timeout: 1200s
+#spark.shuffle.service.enabled: true
+#spark.sql.broadcastTimeout: 1000
+#spark.sql.hive.convertMetastoreParquet: false
+#spark.sql.parquet.compression.codec: snappy
+#spark.sql.shuffle.partitions: 1000
+#spark.yarn.am.cores: 4
+#spark.yarn.am.memory: 28g
+#spark.yarn.am.memoryOverhead: 4g
+#spark.yarn.maxAppAttempts: 5
+#spark.yarn.queue: root.hue_dmp_stage
+
+
+
